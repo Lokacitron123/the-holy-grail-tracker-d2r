@@ -1,4 +1,5 @@
-import Image from "next/image";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import Link from "next/link";
 import React from "react";
 
@@ -17,20 +18,22 @@ const SIDEBAR_LINKS = [
 
 // Hello
 
-const Sidebar = () => {
+const Sidebar = async () => {
+  const { getUser } = getKindeServerSession();
+  const user = await getUser();
+
   return (
-    <div className='flex flex-col lg:w-1/5 gap-5 px-2 sticky left-0 top-0 h-screen text-center'>
+    <div className='flex flex-col pr-5 gap-5 px-2 sticky left-0 top-0 h-screen text-center'>
       <div className='my-5 flex flex-row gap-3 justify-center items-center'>
         {/* Logged in user area */}
-        <div className='cursor-pointer '>
-          <Image
-            src={"" || "/user-placeholder.png"}
+        <Avatar className='cursor-pointer rounded-full'>
+          <AvatarImage
+            src={user?.picture || "/user-placeholder.png"}
             alt='User avatar image'
-            width={44}
-            height={44}
           />
-        </div>
-        <p>Username</p>
+          <AvatarFallback>CN</AvatarFallback>
+        </Avatar>
+        <p>{user?.email}</p>
       </div>
 
       {/* Navlinks */}
