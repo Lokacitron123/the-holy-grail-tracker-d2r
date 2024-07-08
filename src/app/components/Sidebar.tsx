@@ -15,6 +15,8 @@ const SIDEBAR_LINKS = [
   },
 ];
 
+// Hello
+
 const Sidebar = () => {
   return (
     <div className='flex flex-col lg:w-1/5 gap-5 px-2 sticky left-0 top-0 h-screen text-center'>
