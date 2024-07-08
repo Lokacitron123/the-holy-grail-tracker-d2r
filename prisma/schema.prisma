@@ -1,0 +1,18 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model FoundItem {
+  id      String   @id @default(auto()) @map("_id") @db.ObjectId
+  itemId  String   @unique
+  name    String   @unique
+  itemLvl Int
+  foundAt DateTime @default(now())
+
+  @@map("foundItems") // Sets the name in DB - can be different from the model name
+}
