@@ -1,5 +1,5 @@
 import { NextPage } from "next";
-import { getAllUniques, getUniques } from "./lib/items";
+import { getAllUniques, getUniques } from "../lib/actions/items";
 import ItemCard from "./components/ItemCard";
 import BaseLayout from "./layouts/BaseLayout";
 
