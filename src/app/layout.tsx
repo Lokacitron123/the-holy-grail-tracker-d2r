@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Rubik } from "next/font/google";
 import "./globals.css";
 import Header from "./components/header/Header";
+import {TanstackProvider} from '@/app/providers/TanstackProvider'
 
 const rubik = Rubik({ subsets: ["latin"] });
 
@@ -18,8 +19,10 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={rubik.className}>
+     <TanstackProvider>
         <Header />
         {children}
+        </TanstackProvider>
       </body>
     </html>
   );
