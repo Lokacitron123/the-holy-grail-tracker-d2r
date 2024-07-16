@@ -7,12 +7,26 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  name String?
+  email String @unique
+  image String?
+
+  foundItems FoundItem[]
+
+  @@map("users")
+}
+
 model FoundItem {
   id      String   @id @default(auto()) @map("_id") @db.ObjectId
   itemId  String   @unique
   name    String   @unique
   itemLvl Int
   foundAt DateTime @default(now())
+  userId String @db.ObjectId
+
+  user User @relation(fields: [userId], references: [id])
 
   @@map("foundItems") // Sets the name in DB - can be different from the model name
 }
