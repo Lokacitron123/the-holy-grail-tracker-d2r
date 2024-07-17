@@ -8,10 +8,11 @@ datasource db {
 }
 
 model User {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-  name String?
-  email String @unique
-  image String?
+  id     String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId String  @unique
+  name   String?
+  email  String  @unique
+  image  String?
 
   foundItems FoundItem[]
 
@@ -24,9 +25,9 @@ model FoundItem {
   name    String   @unique
   itemLvl Int
   foundAt DateTime @default(now())
-  userId String @db.ObjectId
+  userId  String
 
-  user User @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [userId])
 
   @@map("foundItems") // Sets the name in DB - can be different from the model name
 }

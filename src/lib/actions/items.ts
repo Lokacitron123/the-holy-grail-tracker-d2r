@@ -1,7 +1,6 @@
 "use server";
 
-import { foundItem } from "@prisma/client";
-import { prisma } from "../db/prisma";
+import prisma from "@/lib/db/prisma";
 
 // rest endpoint
 const restEndPoint = process.env.HELLFORGE_UNIQUES as string;
