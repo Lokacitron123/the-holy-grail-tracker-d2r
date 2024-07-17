@@ -1,9 +1,13 @@
 import { NextPage } from "next";
-import { getAllUniques, getUniques } from "../lib/actions/items";
+import { getAllUniques } from "../lib/actions/items";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import ItemCard from "./components/ItemCard";
 import BaseLayout from "./layouts/BaseLayout";
 
 const Home: NextPage = async () => {
+  const { getUser } = getKindeServerSession();
+  const user = await getUser();
+
   const itemsData = getAllUniques();
   const items: Item[] = await itemsData;
 
@@ -15,7 +19,7 @@ const Home: NextPage = async () => {
         </h1>
         <section className='flex flex-col gap-3 w-full mx-auto'>
           {items.map((item) => (
-            <ItemCard item={item} key={item.id} />
+            <ItemCard item={item} userId={user?.id} key={item.id} />
           ))}
         </section>
         {items && items.length === 0 && <p>Sorry, no items available. </p>}
