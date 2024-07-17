@@ -25,9 +25,9 @@ model FoundItem {
   name    String   @unique
   itemLvl Int
   foundAt DateTime @default(now())
-  userId  String
 
-  user User @relation(fields: [userId], references: [userId])
+  userId String
+  user   User   @relation(fields: [userId], references: [userId])
 
   @@map("foundItems") // Sets the name in DB - can be different from the model name
 }

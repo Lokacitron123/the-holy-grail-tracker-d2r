@@ -13,9 +13,10 @@ import React from "react";
 
 interface ItemCardProps {
   item: Item;
+  userId: string | undefined;
 }
 
-const ItemCard = ({ item }: ItemCardProps) => {
+const ItemCard = ({ item, userId }: ItemCardProps) => {
   return (
     <Card>
       <CardHeader>
@@ -25,7 +26,7 @@ const ItemCard = ({ item }: ItemCardProps) => {
         <p>{item.itemLvl}</p>
       </CardContent>
       <CardFooter>
-        <Button variant={"default"} onClick={() => addUnique(item)}>
+        <Button variant={"default"} onClick={() => addUnique(item, userId)}>
           Found This
         </Button>
       </CardFooter>

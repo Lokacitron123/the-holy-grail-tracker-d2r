@@ -36,21 +36,30 @@ export async function getUniques(id: string) {
   }
 }
 
-export async function addUnique(item: Item) {
+export async function addUnique(item: Item, userId: string | undefined) {
   const { name, id, itemLvl } = item;
 
-  console.log("Logging item from addUnique", item);
+  if (!userId) {
+    throw new Error("User ID is required");
+  }
+
   await prisma.foundItem.create({
     data: {
       itemId: id,
       name: name,
       itemLvl: itemLvl,
+      user: {
+        connect: { userId: userId },
+      },
     },
   });
 }
 
-export async function getMyUniques() {
-  const items = await prisma.foundItem.findMany();
-  console.log(items);
+export async function getMyUniques(userId: string | undefined) {
+  if (!userId) {
+    throw new Error("User ID is required");
+  }
+  const items = await prisma.foundItem.findMany({ where: { userId: userId } });
+
   return items;
 }
