@@ -21,8 +21,8 @@ model User {
 
 model FoundItem {
   id      String   @id @default(auto()) @map("_id") @db.ObjectId
-  itemId  String   @unique
-  name    String   @unique
+  itemId  String
+  name    String
   itemLvl Int
   foundAt DateTime @default(now())
 

@@ -39,20 +39,37 @@ export async function getUniques(id: string) {
 export async function addUnique(item: Item, userId: string | undefined) {
   const { name, id, itemLvl } = item;
 
-  if (!userId) {
-    throw new Error("User ID is required");
-  }
+  try {
+    if (!userId) {
+      throw new Error("User ID is required");
+    }
 
-  await prisma.foundItem.create({
-    data: {
-      itemId: id,
-      name: name,
-      itemLvl: itemLvl,
-      user: {
-        connect: { userId: userId },
+    const alreadyFoundItem = await prisma.foundItem.findFirst({
+      where: {
+        itemId: id,
       },
-    },
-  });
+    });
+
+    if (alreadyFoundItem) {
+      return { message: "You have already found this item!" };
+    }
+
+    await prisma.foundItem.create({
+      data: {
+        itemId: id,
+        name: name,
+        itemLvl: itemLvl,
+        user: {
+          connect: { userId: userId },
+        },
+      },
+    });
+
+    return { success: true };
+  } catch (error) {
+    console.log("error message", error);
+    return { success: false, error };
+  }
 }
 
 export async function getMyUniques(userId: string | undefined) {
