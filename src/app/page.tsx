@@ -14,7 +14,7 @@ const Home: NextPage = async () => {
   return (
     <BaseLayout>
       <main className='min-h-screen'>
-        <h1 className='text-5xl text-diablo'>
+        <h1 className='text-4xl text-diablo'>
           Diablo 2 Resurrected Item Fetcher
         </h1>
         <section className='flex flex-col gap-3 w-full mx-auto'>

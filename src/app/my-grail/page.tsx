@@ -8,8 +8,12 @@ const Page = async () => {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
 
+  if(!user) {
+    return <h2 className="text-center">Please login...</h2>
+  }
   const itemsData = getMyUniques(user?.id);
   const items: FoundItem[] = await itemsData;
+
 
   return (
     <BaseLayout>
