@@ -4,12 +4,16 @@ import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import ItemCard from "./components/ItemCard";
 import BaseLayout from "./layouts/BaseLayout";
 
+export const revalidate = 0;
+
 const Home: NextPage = async () => {
   const { getUser } = getKindeServerSession();
-  const user = await getUser();
+  const userData = await getUser();
 
-  const itemsData = getAllUniques();
-  const items: Item[] = await itemsData;
+  const itemsData: Promise<Item[]> = getAllUniques();
+  // const items: Item[] = await itemsData;
+
+  const [user, items] = await Promise.all([userData, itemsData]);
 
   return (
     <BaseLayout>
