@@ -5,6 +5,7 @@ import { FoundItem } from "@prisma/client";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { Metadata } from "next";
 import { redirect } from "next/navigation";
+import { procentCalc } from "@/lib/utils";
 
 export const revalidate = 0;
 
@@ -27,9 +28,12 @@ const Page = async () => {
   const itemsData = getMyUniques(user?.id);
   const items: FoundItem[] = await itemsData;
 
+  const percentage = procentCalc(items.length);
+
   return (
     <BaseLayout>
       <h1 className='text-3xl md:text-5xl py-5 text-center'>My Holy Grail</h1>
+      <p>{percentage}%</p>
       <ul>
         {items.map((item) => (
           <li key={item.id}>name: {item.name}</li>
