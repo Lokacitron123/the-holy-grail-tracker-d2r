@@ -1,6 +1,7 @@
 "use server";
 
 import prisma from "@/lib/db/prisma";
+import { redirect } from "next/navigation";
 
 // rest endpoint
 const restEndPoint = process.env.HELLFORGE_UNIQUES as string;
@@ -63,6 +64,7 @@ export async function addUnique(item: Item, userId: string | undefined) {
           connect: { userId: userId },
         },
       },
+
     });
 
     return { success: true };
@@ -70,6 +72,11 @@ export async function addUnique(item: Item, userId: string | undefined) {
     console.log("error message", error);
     return { success: false, error };
   }
+
+    },
+  });
+  redirect('/my-grail');
+
 }
 
 export async function getMyUniques(userId: string | undefined) {
