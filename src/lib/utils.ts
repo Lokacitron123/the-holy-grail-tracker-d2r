@@ -7,7 +7,9 @@ export function cn(...inputs: ClassValue[]) {
 
 export function procentCalc(amount: number) {
   const totalAmount = 402;
-  const percentage = (amount / totalAmount) * 100;
+  const found = (amount / totalAmount) * 100;
 
-  return `${percentage.toFixed(2)}`;
+  const missing = 100 - found;
+
+  return { percentage: found.toFixed(2), missing: missing.toFixed(2) };
 }
