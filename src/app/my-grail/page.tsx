@@ -6,6 +6,7 @@ import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { procentCalc } from "@/lib/utils";
+import MyGrailPieChart from "../components/MyGrailPieChart";
 
 export const revalidate = 0;
 
@@ -25,19 +26,18 @@ const Page = async () => {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
 
-  if(!user) {
-    return <h2 className="text-center">Please login...</h2>
+  if (!user) {
+    return <h2 className='text-center'>Please login...</h2>;
   }
   const itemsData = getMyUniques(user?.id);
   const items: FoundItem[] = await itemsData;
 
-  const percentage = procentCalc(items.length);
-
+  const { percentage, missing } = procentCalc(items.length);
 
   return (
     <BaseLayout>
       <h1 className='text-3xl md:text-5xl py-5 text-center'>My Holy Grail</h1>
-      <p>{percentage}%</p>
+      <MyGrailPieChart percentage={percentage} missing={missing} />
       <ul>
         {items.map((item) => (
           <li key={item.id}>name: {item.name}</li>

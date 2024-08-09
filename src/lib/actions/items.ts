@@ -64,7 +64,6 @@ export async function addUnique(item: Item, userId: string | undefined) {
           connect: { userId: userId },
         },
       },
-
     });
 
     return { success: true };
@@ -72,11 +71,6 @@ export async function addUnique(item: Item, userId: string | undefined) {
     console.log("error message", error);
     return { success: false, error };
   }
-
-    },
-  });
-  redirect('/my-grail');
-
 }
 
 export async function getMyUniques(userId: string | undefined) {
