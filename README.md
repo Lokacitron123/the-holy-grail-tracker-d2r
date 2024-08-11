@@ -15,3 +15,6 @@ github: https://github.com/mrsteele/hellforge?tab=readme-ov-file
 - https://ui.shadcn.com/docs/components/card
 - https://www.prisma.io/orm
 - CRUD: https://www.prisma.io/docs/orm/prisma-client/queries/crud
+
+Colorpalette: 
+https://icolorpalette.com/color/d40b01
